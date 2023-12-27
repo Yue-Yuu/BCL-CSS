@@ -1,0 +1,17 @@
+#### `data/` directory
+- `drug.txt`: list of drug names
+- `protein.txt`: list of protein names
+- `disease.txt`: list of disease names
+- `se.txt`: list of side effect names
+- `drug_dict_map`: a complete ID mapping between drug names and DrugBank ID
+- `protein_dict_map`: a complete ID mapping between protein names and UniProt ID
+- `mat_drug_se.txt` 		: Drug-SideEffect association matrix
+- `mat_protein_protein.txt` : Protein-Protein interaction matrix
+- `mat_protein_drug.txt` 	: Protein-Drug interaction matrix
+- `mat_drug_protein.txt` 	: Drug_Protein interaction matrix (transpose of the above matrix)
+- `mat_drug_protein_remove_homo.txt`: Drug_Protein interaction matrix, in which homologous proteins with identity score >40% were excluded (see the paper).
+- `mat_drug_drug.txt` 		: Drug-Drug interaction matrix
+- `mat_protein_disease.txt` : Protein-Disease association matrix
+- `mat_drug_disease.txt` 	: Drug-Disease association matrix
+- `Similarity_Matrix_Drugs.txt` 	: Drug similarity scores based on chemical structures of drugs
+- `Similarity_Matrix_Proteins.txt` 	: Protein similarity scores based on primary sequences of proteins
