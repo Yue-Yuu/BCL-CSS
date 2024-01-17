@@ -1,4 +1,27 @@
-#### `data/` directory
+# A multi-network collaborative learning method with Broadcast Contrastive Learning and Co-Self-paced Sampling for drug target interaction prediction
+
+## Requirements
+```
+python=3.10.10
+numpy=1.23.5
+torch=2.0.0
+scipy=1.10.1
+scikit-learn=1.2.2
+```
+
+##  Run model
+
+The drug and protein embeddings are trained and stored at `data/Trained_embs`. To run our model for drug-target interaction:
+- `python train_dti-cnn.py`
+
+To learn drug embeddings from drug graph structure data:
+- `python train_dti-cnn.py --model_type "pretrain_drug" --epoch "2000" `
+
+To learn protien embeddings from protein graph structure data:
+- `python train_dti-cnn.py  --model_type "pretain_protein --epoch "2000" `
+
+## Dataset
+### /data
 - `drug.txt`: list of drug names
 - `protein.txt`: list of protein names
 - `disease.txt`: list of disease names
@@ -8,31 +31,47 @@
 - `mat_drug_se.txt` 		: Drug-SideEffect association matrix
 - `mat_protein_protein.txt` : Protein-Protein interaction matrix
 - `mat_protein_drug.txt` 	: Protein-Drug interaction matrix
-- `mat_drug_protein.txt` 	: Drug_Protein interaction matrix (transpose of the above matrix)
-- `mat_drug_protein_remove_homo.txt`: Drug_Protein interaction matrix, in which homologous proteins with identity score >40% were excluded (see the paper).
+- `mat_drug_protein.txt` 	: Drug_Protein interaction matrix
 - `mat_drug_drug.txt` 		: Drug-Drug interaction matrix
 - `mat_protein_disease.txt` : Protein-Disease association matrix
 - `mat_drug_disease.txt` 	: Drug-Disease association matrix
 - `Similarity_Matrix_Drugs.txt` 	: Drug similarity scores based on chemical structures of drugs
 - `Similarity_Matrix_Proteins.txt` 	: Protein similarity scores based on primary sequences of proteins
 
+### /processed
+- `drug_smile_structure_edge_list`: contains the edges between the atoms in each drug
+- `protein_structure_edge_list` : contains the edges between the amino acid residues in each protein
+- `x_list_drug`: atom initial features of all drug
+- `x_list_protein`: amino acid residue initial features of all protien
+
+### /similarity
+- `sim_mat_drug.txt`: similarity got from Similarity_Matrix_Drugs;Drug similarity scores based on chemical structures of drugs
+- `sim_mat_drug_disease.txt`: similarity learned from Drug-Disease association matrix
+- `sim_mat_drug_drug.txt`: similarity learned from Drug-Drug interaction matrix
+- `sim_mat_drug_protein.txt`: similarity learned from Drug_Protein interaction matrix (transpose of the above matrix)
+- `sim_mat_drug_protein_remove_homo.txt`: similarity learned from  Drug_Protein interaction matrix, in which homologous proteins with identity score >40% were excluded
+- `sim_mat_drug_se.txt`: similarity learned from Drug-SideEffect association matrix
+- `sim_mat_protein.txt`: similarity learned from Protein similarity scores based on primary sequences of proteins
+- `sim_mat_protein_disease.txt`: similarity learned from Protein-Disease association matrix
+- `sim_mat_protein_drug.txt`: similarity learned from Protein-Drug interaction matrix
+- `sim_mat_protein_protein.txt`: Protein-Protein interaction matrix
+- `association_sim_drug.txt`: combine `sim_mat_drug_drug`, `sim_mat_drug_disease`, `sim_mat_drug_se`get the association similarity
+- `association_sim_protein.txt`: combine `sim_mat_protein_disease.txt`, `sim_mat_protein_protein.txt` get the association similarity
+
+### /Trained_embs
+- `drug`: drug embs trained from drug graph structure data
+-  `protein`: protien embs trained from protein graph structure data
 
 
-### 1. 改变T10中的intra（视角内）对比的子图生成
-- 原两个都使用随机dropout，并将所有sim>0.5的置为1，其余置为0的方法；
-- 在T10-23-03-26中，使用dropout，并将所有sim>0.5的置为1，其余置为0生成一个子图；
-- 使用所有sim>0.5的保留值，其余置为0生成一个子图；
-
-### 2. 在1中更改子图生成方法后，更改GCN层数为2层
-- 分别评估只使用第二层GCN的输出和使用两层输出相加的效果
-
-### 3. add shuffle to train and test data (2023-04-03-17:09)
-# 0616
-```text
-已经添加了ddi、ppi的重构损失
-1. 使用dot乘法重构dd和pp的相似度网络
-
-1. 添加dti的重构损失
 
 
-```
+
+
+
+
+
+
+
+
+
+

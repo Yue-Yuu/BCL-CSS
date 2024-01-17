@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser(description='BCL-CSS')
 parser.add_argument('--seed', type=int, default=1, help='Random seed.')
 parser.add_argument('--epochs', type=int, default=5000,  # 10000
                     help='Number of epochs to train.')
-parser.add_argument('--lr', type=float, default=0.001,  # 0.0005
+parser.add_argument('--lr', type=float, default=0.0005,  # 0.0005
                     help='Initial learning rate.')
 parser.add_argument('--dropout', type=float, default=0.3,
                     help='Dropout rate (1 - keep probability).')
@@ -86,6 +86,7 @@ def train(args,epoch,dti_train_index, dti_train_label,dti_train_pos_mat,ddi_trai
     Loss_func = nn.BCELoss()
     day_time = datetime.datetime.strftime(datetime.datetime.now(), '%m%d')
     embs_path = "data/Trained_embs"
+    print("pretrain embeddings")
 
     "pretrain_drug"
     "pretrain_protein"
@@ -168,7 +169,7 @@ for i in range(5):
     "pretrain_protein"
     "contrast"
     """
-    args.model_type ="pretrain_drug"  # pretrain_drug pretain_protein
+    args.model_type ="contrast"  # pretrain_drug pretain_protein
 
     # Train model
     t_total = time.time()

@@ -1,10 +1,4 @@
 
-##  Run model
-
-1. -Run `Construct_similarity_Net.py`
-2. -Run `Run_DAE.py`
-3. -Run `train_dti_cnn.py`
-
 #### directory
 
 - `sim_mat_drug.txt`: similarity learned from Similarity_Matrix_Drugs;Drug similarity scores based on chemical structures of drugs
