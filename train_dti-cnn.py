@@ -91,7 +91,7 @@ def train(args,epoch,dti_train_index, dti_train_label,dti_train_pos_mat,ddi_trai
     "pretrain_protein"
     "reconstruct"
     if args.model_type == "pretrain_drug":
-        print("pretrain embeddings")
+        print("pretrain drug embeddings")
         drug_embs, ddi_score = model(drug_data,protein_data,ddi_train_index,ppi_train_index,dti_train_index,dti_train_label,dti_train_pos_mat)
         output = ddi_score
         labels = ddi_train_label
